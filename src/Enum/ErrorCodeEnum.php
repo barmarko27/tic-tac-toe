@@ -11,4 +11,5 @@ enum ErrorCodeEnum: int
     case MATCH_NOT_PLAYABLE = 300;
     case NOT_PLAYER_TURN = 400;
     case POSITION_ALREADY_TAKEN = 500;
+    case PLAYER_NOT_FOUND = 600;
 }

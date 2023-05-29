@@ -11,6 +11,8 @@ use App\Entity\Game;
 use App\Entity\Move;
 use App\Entity\Player;
 use App\Enum\StatusEnum;
+use App\Exception\GameNotFoundException;
+use App\Exception\PlayerNotFoundException;
 use App\Repository\GameRepository;
 use Doctrine\Common\Collections\Collection;
 
@@ -29,7 +31,7 @@ final readonly class GameMapper implements MapperInterface
     {
         $game = $this->repository->find($dto->id);
         if (!$game) {
-            throw new \DomainException('Game not found');
+            throw new GameNotFoundException($dto->id);
         }
 
         return $game;
@@ -65,7 +67,7 @@ final readonly class GameMapper implements MapperInterface
         });
 
         if (!$player instanceof Player) {
-            throw new \DomainException('Player not found!');
+            throw new PlayerNotFoundException($number);
         }
 
         return $player->getSymbolAssigned();

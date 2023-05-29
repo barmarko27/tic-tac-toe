@@ -8,6 +8,7 @@ use App\Dto\DtoInterface;
 use App\Dto\GameStatusDto;
 use App\Entity\EntityInterface;
 use App\Entity\Game;
+use App\Exception\GameNotFoundException;
 use App\Exception\NotImplementedException;
 use App\Repository\GameRepository;
 
@@ -26,7 +27,7 @@ final readonly class GameStatusMapper implements MapperInterface
     {
         $game = $this->repository->find($dto->gameId);
         if (!$game) {
-            throw new \DomainException('Game not found');
+            throw new GameNotFoundException($dto->gameId);
         }
 
         return $game;
